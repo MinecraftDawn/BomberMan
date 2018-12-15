@@ -53,24 +53,25 @@ public class Sandbox {
     public static boolean addEntityToGame(Entity e) {
 
         if (e instanceof BlackBomb) {
-            if (((BlackBomb)e).getBelong().getLimit() < 5) {
+            BlackBomb bomb = (BlackBomb) e;
+
+            if (bomb.getBelong().getLimit() < 5) {
 //                System.out.println(sandboxPlayer1.getLimit());
 
                 for (Entity entity : entities) {
                     if (entity.getPositionX() == e.getPositionX() && entity.getPositionY() == e.getPositionY()) {
-                        System.out.println("沒放到炸彈");
                         return false;
                     }
                 }
 
-                if (((BlackBomb)e).getBelong() == sandboxPlayer1)
+                if (bomb.getBelong() == sandboxPlayer1) {
                     sandboxPlayer1.limitIncrease();
-                else
+                } else {
                     sandboxPlayer2.limitIncrease();
-            }
-            else {
-                System.out.println("p1");
-                System.out.println("p2");
+                }
+
+                bombList.add(bomb);
+            } else {
                 System.out.println("超過系統限制");
                 return false;
             }
@@ -156,7 +157,7 @@ public class Sandbox {
         addEntityToGame(p2);
     }
 
-    public static Player getPlayer() {
+    public static Player getPlayer1() {
         return sandboxPlayer1;
     }
 

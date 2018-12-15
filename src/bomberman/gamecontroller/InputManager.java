@@ -25,7 +25,7 @@ public class InputManager {
     //need to be overloaded
     public static void handlePlayerMovements() {
         List keyboardInputs = EventHandler.getInputList();
-        Player player1 = Sandbox.getPlayer();
+        Player player1 = Sandbox.getPlayer1();
         Player player2 = Sandbox.getPlayer2();
 
         //System.err.println(""+keyboardInputs);
@@ -69,8 +69,7 @@ public class InputManager {
         if (keyboardInputs.contains(KeyCode.ENTER) || keyboardInputs.contains(KeyCode.SPACE)) {
             //須創建Boomb的EntityList
             //需要判斷該位置是否有炸彈
-//            System.out.println("*");
-            Player p = (keyboardInputs.contains(KeyCode.ENTER))? player1:player2;
+            Player p = (keyboardInputs.contains(KeyCode.ENTER)) ? player1 : player2;
             int posX, posY;
 
             posX = p.getPositionX() + 16;
@@ -79,7 +78,8 @@ public class InputManager {
             posX = posX - posX % 32;
             posY = posY - posY % 32;
 
-            //在低能一點忘記改這裡啊><?????
+            //在低能一點忘記改這裡啊><
+            //爽Ra
             Sandbox.addEntityToGame(new BlackBomb(posX, posY, p));
         }
     }

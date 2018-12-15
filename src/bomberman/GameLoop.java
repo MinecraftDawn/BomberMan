@@ -53,15 +53,18 @@ public class GameLoop {
         //remove the current bomb
         while (it.hasNext()) {
             Entity entity = it.next();
+
             if (entity instanceof BlackBomb) {
-                boolean alive = ((BlackBomb) entity).isAlive();
+                BlackBomb bomb = (BlackBomb) entity;
+                boolean alive = bomb.isAlive();
+
                 if (!alive) {
                     // not removig directly from list to prevent ConcurrentModification
-                    System.out.println("*");
-                    if (((BlackBomb)entity).getBelong() == Sandbox.getPlayer())
-                        Sandbox.getPlayer().limitDecrease();
-                    else
+                    if (bomb.getBelong() == Sandbox.getPlayer1()) {
+                        Sandbox.getPlayer1().limitDecrease();
+                    } else {
                         Sandbox.getPlayer2().limitDecrease();
+                    }
                     it.remove();
                 }
             }
