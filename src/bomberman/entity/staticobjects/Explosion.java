@@ -45,7 +45,7 @@ public class Explosion implements Entity {
     }
 
     public STATE getState(){
-        if(new Date().getTime() > startTime){
+        if(new Date().getTime() > explodeTime + startTime){
             return STATE.EXPLOD_END;
         }else{
             return STATE.EXPLODING;
