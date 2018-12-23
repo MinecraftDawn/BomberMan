@@ -72,7 +72,7 @@ public class BlackBomb implements StaticEntity {
 //            Explosion newExplosion = new Explosion(this);
 //            Sandbox.explosionList.add(newExplosion);
 //            Sandbox.addEntityToGame(newExplosion);
-            Sandbox.addExplosion(1, this);
+            Sandbox.addExplosion(0, this);
             return STATE.DEAD;
 
         //若準備爆炸，則修改貼圖
