@@ -28,6 +28,17 @@ public class Explosion implements Entity {
         sprite = animation.getExplosion();
     }
 
+    public Explosion (BlackBomb bomb, int x, int y) {
+        belong = bomb;
+        positionX = x;
+        positionY = y;
+        height = 16;
+        width = 16;
+        animation = new ExplosionAnimation(this);
+        startTime = new Date().getTime();
+        sprite = animation.getExplosion();
+    }
+
     public enum STATE{
         EXPLODING,
         EXPLOD_END

@@ -87,6 +87,22 @@ public class Sandbox {
         }
     }
 
+    public static void addExplosion(int range, BlackBomb bomb) {
+        int x = bomb.getPositionX();
+        int y = bomb.getPositionY();
+
+        for (int i = -range; i <= range; i++) {
+            Explosion xExplosion = new Explosion(bomb, x + i * 32, y);
+            Explosion yExplosion = new Explosion(bomb, x, y + i * 32);
+
+            explosionList.add(xExplosion);
+            explosionList.add(yExplosion);
+
+            addEntityToGame(xExplosion);
+            addEntityToGame(yExplosion);
+        }
+    }
+
     private static void init() {
         root = new Group();
         scene = new Scene(root, SCENE_WIDTH, SCENE_HEIGHT);
