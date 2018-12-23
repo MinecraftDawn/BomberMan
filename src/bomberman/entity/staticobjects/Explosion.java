@@ -5,6 +5,7 @@ import bomberman.animations.Sprite;
 import bomberman.entity.Entity;
 import bomberman.entity.boundedbox.RectBoundedBox;
 import bomberman.animations.ExplosionAnimation;
+import bomberman.entity.player.Player;
 
 import java.util.Date;
 
@@ -66,7 +67,7 @@ public class Explosion implements Entity {
 
     @Override
     public boolean isPlayerCollisionFriendly() {
-        return false;
+        return true;
     }
 
     @Override
