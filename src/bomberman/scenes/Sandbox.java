@@ -92,14 +92,24 @@ public class Sandbox {
         int y = bomb.getPositionY();
 
         for (int i = -range; i <= range; i++) {
-            Explosion xExplosion = new Explosion(bomb, x + i * 32, y);
-            Explosion yExplosion = new Explosion(bomb, x, y + i * 32);
+            Explosion xExplosion;
+            Explosion yExplosion;
 
-            explosionList.add(xExplosion);
-            explosionList.add(yExplosion);
+            if (i != 0) {
+                xExplosion = new Explosion(bomb, x + i * 32, y);
+                yExplosion = new Explosion(bomb, x, y + i * 32);
 
-            addEntityToGame(xExplosion);
-            addEntityToGame(yExplosion);
+                explosionList.add(xExplosion);
+                explosionList.add(yExplosion);
+
+                addEntityToGame(xExplosion);
+                addEntityToGame(yExplosion);
+            }
+            else {
+                xExplosion = new Explosion(bomb, x, y);
+                explosionList.add(xExplosion);
+                addEntityToGame(xExplosion);
+            }
         }
     }
 
