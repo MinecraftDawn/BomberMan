@@ -66,6 +66,7 @@ public class GameLoop {
                         Sandbox.getPlayer2().limitDecrease();
                     }
                     it.remove();
+                    Sandbox.addExplosion(0, bomb);
                 }
             }
         }
