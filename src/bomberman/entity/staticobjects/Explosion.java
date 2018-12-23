@@ -5,6 +5,7 @@ import bomberman.animations.Sprite;
 import bomberman.entity.Entity;
 import bomberman.entity.boundedbox.RectBoundedBox;
 import bomberman.animations.ExplosionAnimation;
+import bomberman.entity.player.Player;
 
 import java.util.Date;
 
@@ -13,7 +14,7 @@ public class Explosion implements Entity {
     private int height, width;
     private Sprite sprite;
     private BlackBomb belong;
-    private long explodeTime = 200;
+    private long explodeTime = 400;
     private long startTime;
     private ExplosionAnimation animation;
     private RectBoundedBox entityBoundary;
