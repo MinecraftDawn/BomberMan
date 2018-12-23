@@ -66,7 +66,7 @@ public class Explosion implements Entity {
 
     @Override
     public boolean isPlayerCollisionFriendly() {
-        return false;
+        return true;
     }
 
     @Override

@@ -117,7 +117,7 @@ public class BlackBomb implements StaticEntity {
 
     @Override
     public boolean isPlayerCollisionFriendly() {
-        return true;
+        return false;
     }
 
 }
