@@ -51,6 +51,7 @@ public class GameLoop {
         InputManager.handlePlayerMovements();
         Vector<Entity> entities = Sandbox.getEntities();
         Iterator<Entity> it = entities.iterator();
+        Vector<BlackBomb> deadBomb = new Vector<>();
         //remove the current bomb
         while (it.hasNext()) {
             Entity entity = it.next();
@@ -66,8 +67,9 @@ public class GameLoop {
                     } else {
                         Sandbox.getPlayer2().limitDecrease();
                     }
+                    deadBomb.add(bomb);
                     it.remove();
-                    Sandbox.addExplosion(0, bomb);
+//                    Sandbox.addExplosion(0, bomb);
                 }
             } else if (entity instanceof Explosion) {
                 Explosion explosion = (Explosion) entity;
@@ -77,6 +79,11 @@ public class GameLoop {
                     it.remove();
                 }
             }
+        }
+        Iterator<BlackBomb> bombIt = deadBomb.iterator();
+        while (bombIt.hasNext()){
+            Sandbox.addExplosion(0,bombIt.next());
+            bombIt.remove();
         }
     }
 
