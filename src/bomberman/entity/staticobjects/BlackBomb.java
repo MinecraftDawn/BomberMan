@@ -13,6 +13,7 @@ import bomberman.animations.Sprite;
 import bomberman.entity.Entity;
 import bomberman.entity.StaticEntity;
 import bomberman.entity.boundedbox.RectBoundedBox;
+import bomberman.scenes.Sandbox;
 
 import java.util.Date;
 
@@ -26,6 +27,7 @@ public class BlackBomb implements StaticEntity {
     private int width;
     private Sprite sprite;
     private Player belong;
+    private Sandbox scene;
 
     RectBoundedBox entityBoundary;
     BombAnimations bomb_animations;
@@ -41,7 +43,8 @@ public class BlackBomb implements StaticEntity {
         DEAD;   //when the bomb has already exploded
     }
 
-    public BlackBomb(int x, int y, Player p) {
+    public BlackBomb(int x, int y, Player p, Sandbox box) {
+        scene = box;
         belong = p;
         positionX = x;
         positionY = y;
