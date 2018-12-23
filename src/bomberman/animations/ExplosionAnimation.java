@@ -16,7 +16,7 @@ public class ExplosionAnimation {
     //與BlackBomb的建構方式類似
     public ExplosionAnimation(Entity e) {
         Image img = Renderer.getSpiteSheet();
-        playSpeed = 0.1;
+        playSpeed = 0.3;
 
         List<Rectangle> specs = new ArrayList<>();
 
