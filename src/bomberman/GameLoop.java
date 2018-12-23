@@ -4,6 +4,7 @@ import bomberman.constants.GlobalConstants;
 import bomberman.entity.Entity;
 import bomberman.entity.player.Player;
 import bomberman.entity.staticobjects.BlackBomb;
+import bomberman.entity.staticobjects.Explosion;
 import bomberman.gamecontroller.InputManager;
 import bomberman.scenes.Sandbox;
 
@@ -67,6 +68,13 @@ public class GameLoop {
                     }
                     it.remove();
                     Sandbox.addExplosion(0, bomb);
+                }
+            } else if (entity instanceof Explosion) {
+                Explosion explosion = (Explosion) entity;
+                boolean alive = (!explosion.getState().equals(Explosion.STATE.EXPLOD_END));
+
+                if (!alive) {
+                    it.remove();
                 }
             }
         }
