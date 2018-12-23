@@ -1,14 +1,17 @@
 package bomberman.entity.staticobjects;
 
+import bomberman.Renderer;
 import bomberman.animations.Sprite;
 import bomberman.entity.Entity;
 import bomberman.entity.boundedbox.RectBoundedBox;
+import bomberman.animations.ExplosionAnimation;
 
 public class Explosion implements Entity {
     private int positionX, positionY;
     private int height, width;
     private Sprite sprite;
     private BlackBomb belong;
+    private ExplosionAnimation animation;
 
     public Explosion (BlackBomb bomb) {
         belong = bomb;
@@ -16,6 +19,12 @@ public class Explosion implements Entity {
         positionY = belong.getPositionY();
         height = 16;
         width = 16;
+        animation = new ExplosionAnimation(this);
+        sprite = animation.getExplosion();
+    }
+
+    public BlackBomb getBelong() {
+        return belong;
     }
 
     @Override
@@ -30,7 +39,7 @@ public class Explosion implements Entity {
 
     @Override
     public void draw() {
-
+        Renderer.playAnimation(sprite);
     }
 
     @Override
@@ -40,12 +49,12 @@ public class Explosion implements Entity {
 
     @Override
     public int getPositionX() {
-        return 0;
+        return positionX;
     }
 
     @Override
     public int getPositionY() {
-        return 0;
+        return positionY;
     }
 
     @Override
