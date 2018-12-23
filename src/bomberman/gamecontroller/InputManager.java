@@ -80,7 +80,7 @@ public class InputManager {
 
             //在低能一點忘記改這裡啊><
             //爽Ra
-            Sandbox.addEntityToGame(new BlackBomb(posX, posY, p, Sandbox));
+            Sandbox.addEntityToGame(new BlackBomb(posX, posY, p));
         }
     }
 }

@@ -27,7 +27,6 @@ public class BlackBomb implements StaticEntity {
     private int width;
     private Sprite sprite;
     private Player belong;
-    private Sandbox scene;
 
     RectBoundedBox entityBoundary;
     BombAnimations bomb_animations;
@@ -42,8 +41,7 @@ public class BlackBomb implements StaticEntity {
         DEAD;   //when the bomb has already exploded
     }
 
-    public BlackBomb(int x, int y, Player p, Sandbox box) {
-        scene = box;
+    public BlackBomb(int x, int y, Player p) {
         belong = p;
         positionX = x;
         positionY = y;

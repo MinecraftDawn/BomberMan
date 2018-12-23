@@ -17,6 +17,7 @@ import bomberman.Renderer;
 import bomberman.entity.Entity;
 import bomberman.entity.player.Player;
 import bomberman.entity.staticobjects.BlackBomb;
+import bomberman.entity.staticobjects.Explosion;
 import bomberman.entity.staticobjects.Level;
 import bomberman.entity.staticobjects.Wall;
 import bomberman.gamecontroller.EventHandler;
@@ -45,6 +46,7 @@ public class Sandbox {
     private static Vector<Entity> entities = new Vector<Entity>();
     private static Vector<BlackBomb> bombList = new Vector<BlackBomb>();
     private static Vector<Player> playerList = new Vector<Player>();
+    private static Vector<Explosion> explosionList = new Vector<Explosion>();
 
     public static Vector<Entity> getEntities() {
         return entities;
