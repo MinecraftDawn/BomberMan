@@ -16,6 +16,7 @@ public class Explosion implements Entity {
     private long explodeTime = 200;
     private long startTime;
     private ExplosionAnimation animation;
+    private RectBoundedBox entityBoundary;
 
     public Explosion (BlackBomb bomb) {
         belong = bomb;
@@ -26,6 +27,7 @@ public class Explosion implements Entity {
         animation = new ExplosionAnimation(this);
         startTime = new Date().getTime();
         sprite = animation.getExplosion();
+        entityBoundary = new RectBoundedBox(positionX, positionY, width, height);
     }
 
     public Explosion (BlackBomb bomb, int x, int y) {
@@ -37,6 +39,7 @@ public class Explosion implements Entity {
         animation = new ExplosionAnimation(this);
         startTime = new Date().getTime();
         sprite = animation.getExplosion();
+        entityBoundary = new RectBoundedBox(positionX, positionY, width, height);
     }
 
     public enum STATE{
@@ -73,7 +76,7 @@ public class Explosion implements Entity {
 
     @Override
     public void removeFromScene() {
-
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
@@ -88,6 +91,6 @@ public class Explosion implements Entity {
 
     @Override
     public RectBoundedBox getBoundingBox() {
-        return null;
+        return entityBoundary;
     }
 }
