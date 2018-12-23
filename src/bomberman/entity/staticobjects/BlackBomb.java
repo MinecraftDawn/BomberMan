@@ -33,7 +33,6 @@ public class BlackBomb implements StaticEntity {
     BombAnimations bomb_animations;
     Date addedDate;
     int bomberExistTime = 2000;
-    int bomberBoomTime = 1800;
     STATE bombState;
 
     public enum STATE {
@@ -75,10 +74,6 @@ public class BlackBomb implements StaticEntity {
             return STATE.DEAD;
 
         //若準備爆炸，則修改貼圖
-        }else if (new Date().getTime() > bomberBoomTime + addedDate.getTime()){
-            sprite = bomb_animations.getSprite(STATE.EXPLODING);
-            return STATE.EXPLODING;
-
         } else {
             return STATE.ACTIVE;
         }
