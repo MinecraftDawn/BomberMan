@@ -10,6 +10,7 @@ import static bomberman.constants.GlobalConstants.CANVAS_WIDTH;
 import static bomberman.constants.GlobalConstants.SCENE_HEIGHT;
 import static bomberman.constants.GlobalConstants.SCENE_WIDTH;
 
+import java.util.Iterator;
 import java.util.Vector;
 
 import bomberman.GameLoop;
@@ -44,8 +45,8 @@ public class Sandbox {
     }
 
     private static Vector<Entity> entities = new Vector<Entity>();
-    private static Vector<BlackBomb> bombList = new Vector<BlackBomb>();
-    private static Vector<Player> playerList = new Vector<Player>();
+    public static Vector<BlackBomb> bombList = new Vector<BlackBomb>();
+    public static Vector<Player> playerList = new Vector<Player>();
     private static Vector<Explosion> explosionList = new Vector<Explosion>();
 
     public static Vector<Entity> getEntities() {
@@ -96,8 +97,32 @@ public class Sandbox {
         for (int i = -power; i <= power; i++) {
             Explosion xExplosion;
             Explosion yExplosion;
+//            boolean isSetX = true;
+//            boolean isSetY = true;
+            Iterator<BlackBomb> it = bombList.iterator();
+            Vector<BlackBomb> explode = new Vector<BlackBomb>();
+
+            while(it.hasNext()) {
+                BlackBomb theBomb = it.next();
+                int bombx = theBomb.positionX;
+                int bomby = theBomb.positionY;
+
+                if ((bombx == x + i * 32 && bomby == y) || (bombx == x && bomby == y + i * 32)) {
+                    //remove this bomb from the bombList but entityList
+                    it.remove();
+                    theBomb.setBombState(BlackBomb.STATE.DEAD);
+                    explode.add(theBomb);
+                }
+            }
+
+            it = explode.iterator();
+            while(it.hasNext()) {
+                BlackBomb theBomb = it.next();
+                addExplosion(theBomb);
+            }
 
             if (i != 0) {
+
                 xExplosion = new Explosion(bomb, x + i * 32, y);
                 yExplosion = new Explosion(bomb, x, y + i * 32);
 

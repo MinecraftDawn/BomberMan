@@ -56,6 +56,14 @@ public class BlackBomb implements StaticEntity {
         bombState = STATE.ACTIVE;
     }
 
+    public void setBombState(STATE bombState) {
+        this.bombState = bombState;
+    }
+
+    public boolean isExploded() {
+        return (bombState == STATE.DEAD)? true:false;
+    }
+
     public boolean isAlive() {
         STATE s = checkBombState();
         if (s == STATE.DEAD) {
