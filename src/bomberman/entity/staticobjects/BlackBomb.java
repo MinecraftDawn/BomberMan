@@ -27,11 +27,13 @@ public class BlackBomb implements StaticEntity {
     private int width;
     private Sprite sprite;
     private Player belong;
+    private boolean canPenetrate = true;
 
     RectBoundedBox entityBoundary;
     BombAnimations bomb_animations;
     long startTime;
     int bomberExistTime = 1800;
+    int penetrateTime = 200;
     STATE bombState;
 
     public enum STATE {
@@ -69,14 +71,13 @@ public class BlackBomb implements StaticEntity {
     //確認爆炸狀態
     public STATE checkBombState() {
         if (new Date().getTime() > bomberExistTime + startTime) {
-//            Explosion newExplosion = new Explosion(this);
-//            Sandbox.explosionList.add(newExplosion);
-//            Sandbox.addEntityToGame(newExplosion);
-//            Sandbox.addExplosion(0, this);
             return STATE.DEAD;
-
-        //若準備爆炸，則修改貼圖
-        } else {
+        }
+        else if (new Date().getTime() > penetrateTime + startTime) {
+            canPenetrate = false;
+            return STATE.ACTIVE;
+        }
+        else {
             return STATE.ACTIVE;
         }
     }
@@ -117,7 +118,7 @@ public class BlackBomb implements StaticEntity {
 
     @Override
     public boolean isPlayerCollisionFriendly() {
-        return false;
+        return canPenetrate;
     }
 
 }
