@@ -79,6 +79,11 @@ public class GameLoop {
                     it.remove();
                 }
             }
+            else if (entity instanceof Player) {
+                Player p = (Player)entity;
+                if (!p.isAlive())
+                    it.remove();
+            }
         }
         //把爆炸的實體放入entitys List內
         Iterator<BlackBomb> bombIt = deadBomb.iterator();

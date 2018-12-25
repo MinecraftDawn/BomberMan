@@ -10,6 +10,7 @@ import bomberman.entity.Entity;
 import bomberman.entity.KillableEntity;
 import bomberman.entity.MovingEntity;
 import bomberman.entity.boundedbox.RectBoundedBox;
+import bomberman.entity.staticobjects.Explosion;
 import bomberman.scenes.Sandbox;
 import javafx.scene.input.KeyCode;
 
@@ -126,6 +127,12 @@ public class Player implements MovingEntity, KillableEntity {
 
         for (Entity e : Sandbox.getEntities()) {
             if (e != this && isColliding(e) && !e.isPlayerCollisionFriendly()) {
+
+                if (e instanceof Explosion) {
+                    System.out.println("*");
+                    damage(100);
+                }
+
                 playerBoundary.setPosition(positionX, positionY);
                 /*
                 System.out.println("Player x="+getPositionX()+" y="
