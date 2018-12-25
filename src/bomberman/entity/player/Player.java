@@ -130,6 +130,7 @@ public class Player implements MovingEntity, KillableEntity {
         playerBoundary.setPosition(x, y);
 
         for (Entity e : Sandbox.getEntities()) {
+
             if (e != this && isColliding(e) && !e.isPlayerCollisionFriendly()) {
                 if (e instanceof Explosion) {
                     System.out.println("*");

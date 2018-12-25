@@ -67,8 +67,7 @@ public class GameLoop {
                     } else {
                         Sandbox.getPlayer2().limitDecrease();
                     }
-                }
-                else if (!alive) {
+                } else if (!alive) {
                     // not removig directly from list to prevent ConcurrentModification
                     if (bomb.getBelong() == Sandbox.getPlayer1()) {
                         Sandbox.getPlayer1().limitDecrease();
@@ -79,7 +78,7 @@ public class GameLoop {
                     it.remove();
                     Sandbox.bombList.remove(0);
                 }
-            //如果實體是爆炸
+                //如果實體是爆炸
             } else if (entity instanceof Explosion) {
                 Explosion explosion = (Explosion) entity;
                 boolean alive = (!explosion.getState().equals(Explosion.STATE.EXPLOD_END));
@@ -87,16 +86,22 @@ public class GameLoop {
                 if (!alive) {
                     it.remove();
                 }
-            }
-            else if (entity instanceof Player) {
-                Player p = (Player)entity;
+            } else if (entity instanceof Player) {
+                Player p = (Player) entity;
+
+                Vector<Explosion> explosions = Sandbox.getExplosionList();
+                for(Explosion e : explosions){
+                    if(p.isColliding(e)){
+                        p.damage(100);
+                    }
+                }
                 if (!p.isAlive())
                     it.remove();
             }
         }
         //把爆炸的實體放入entitys List內
         Iterator<BlackBomb> bombIt = deadBomb.iterator();
-        while (bombIt.hasNext()){
+        while (bombIt.hasNext()) {
             Sandbox.addExplosion(bombIt.next());
             bombIt.remove();
         }

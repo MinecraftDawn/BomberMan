@@ -218,4 +218,8 @@ public class Sandbox {
     public static Player getPlayer2() {
         return sandboxPlayer2;
     }
+
+    public static Vector<Explosion> getExplosionList(){
+        return explosionList;
+    }
 }
