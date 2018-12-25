@@ -131,8 +131,8 @@ public class Player implements MovingEntity, KillableEntity {
                     System.out.println("*");
                     damage(100);
                 }
-
-                playerBoundary.setPosition(positionX, positionY);
+                else
+                    playerBoundary.setPosition(positionX, positionY);
                 /*
                 System.out.println("Player x="+getPositionX()+" y="
                         +getPositionY()+" colliding with x="+e.getPositionX()
