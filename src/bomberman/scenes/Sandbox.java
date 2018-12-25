@@ -87,11 +87,13 @@ public class Sandbox {
         }
     }
 
-    public static void addExplosion(int range, BlackBomb bomb) {
+    public static void addExplosion(BlackBomb bomb) {
         int x = bomb.getPositionX();
         int y = bomb.getPositionY();
 
-        for (int i = -range; i <= range; i++) {
+        int power = bomb.getBelong().getPower();
+
+        for (int i = -power; i <= power; i++) {
             Explosion xExplosion;
             Explosion yExplosion;
 

@@ -51,7 +51,7 @@ public class GameLoop {
         InputManager.handlePlayerMovements();
         Vector<Entity> entities = Sandbox.getEntities();
         Iterator<Entity> it = entities.iterator();
-        Vector<BlackBomb> deadBomb = new Vector<>();
+        Vector<BlackBomb> deadBomb = new Vector<>();//儲存已死亡的炸彈，用來產生爆炸實體
         //remove the current bomb
         while (it.hasNext()) {
             Entity entity = it.next();
@@ -69,8 +69,8 @@ public class GameLoop {
                     }
                     deadBomb.add(bomb);
                     it.remove();
-//                    Sandbox.addExplosion(0, bomb);
                 }
+            //如果實體是爆炸
             } else if (entity instanceof Explosion) {
                 Explosion explosion = (Explosion) entity;
                 boolean alive = (!explosion.getState().equals(Explosion.STATE.EXPLOD_END));
@@ -80,9 +80,10 @@ public class GameLoop {
                 }
             }
         }
+        //把爆炸的實體放入entitys List內
         Iterator<BlackBomb> bombIt = deadBomb.iterator();
         while (bombIt.hasNext()){
-            Sandbox.addExplosion(0,bombIt.next());
+            Sandbox.addExplosion(bombIt.next());
             bombIt.remove();
         }
     }

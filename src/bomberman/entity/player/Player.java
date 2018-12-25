@@ -20,6 +20,7 @@ public class Player implements MovingEntity, KillableEntity {
     private int bombLimit;
     private int playerNumber;
     RectBoundedBox playerBoundary;
+    private int power;
 
     Sprite currentSprite;
     PlayerAnimations playerAnimations;
@@ -32,10 +33,14 @@ public class Player implements MovingEntity, KillableEntity {
     String name;
 
     public Player(int num) {
-        if (num == 1)
+        if (num == 1) {
             init(64, 64);
-        else if (num == 2)
+        } else if (num == 2) {
             init(576, 576);
+        }
+        power = 1;
+        health = 100;
+        isAlive = true;
         bombLimit = 0;
         playerNumber = num;
     }
@@ -70,6 +75,10 @@ public class Player implements MovingEntity, KillableEntity {
         } else {
             System.out.println("Sprite missing!");
         }
+    }
+
+    public int getPower(){
+        return power;
     }
 
     public int getHealth() {
@@ -128,8 +137,7 @@ public class Player implements MovingEntity, KillableEntity {
         if (steps == 0) {
             setCurrentSprite(playerAnimations.getPlayerIdleSprite());
             return;
-        }
-        else {
+        } else {
             switch (direction) {
                 case UP:
                     if (!checkCollisions(positionX, positionY - steps)) {
