@@ -34,6 +34,7 @@ public class Player implements MovingEntity, KillableEntity {
     String name;
 
     public Player(int num) {
+        playerNumber = num;
         if (num == 1) {
             init(64, 64);
         } else if (num == 2) {
@@ -43,7 +44,6 @@ public class Player implements MovingEntity, KillableEntity {
         health = 100;
         isAlive = true;
         bombLimit = 0;
-        playerNumber = num;
     }
 
     public Player(int posX, int posY) {
@@ -101,6 +101,10 @@ public class Player implements MovingEntity, KillableEntity {
 
     public String toString() {
         return name;
+    }
+
+    public int getPlayerNumber(){
+        return playerNumber;
     }
 
     @Override

@@ -74,7 +74,6 @@ public class Sandbox {
 
                 bombList.add(bomb);
             } else {
-                System.out.println("超過系統限制");
                 return false;
             }
         }
