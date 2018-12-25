@@ -33,11 +33,11 @@ public class Player implements MovingEntity, KillableEntity {
 
     String name;
 
-    public Player(int num) {
-        playerNumber = num;
-        if (num == 1) {
+    public Player(int playerNum) {
+        playerNumber = playerNum;
+        if (playerNumber == 1) {
             init(64, 64);
-        } else if (num == 2) {
+        } else if (playerNumber == 2) {
             init(576, 576);
         }
         power = 1;
