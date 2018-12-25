@@ -77,6 +77,15 @@ public class Player implements MovingEntity, KillableEntity {
         }
     }
 
+    public void damage(int damage){
+        health -= damage;
+
+        if(health <= 0 ){
+            health = 0;
+            isAlive = false;
+        }
+    }
+
     public int getPower(){
         return power;
     }
