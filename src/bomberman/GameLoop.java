@@ -85,6 +85,7 @@ public class GameLoop {
 
                 if (!alive) {
                     it.remove();
+                    Sandbox.explosionList.remove(0);
                 }
             } else if (entity instanceof Player) {
                 Player p = (Player) entity;

@@ -47,7 +47,7 @@ public class Sandbox {
     private static Vector<Entity> entities = new Vector<Entity>();
     public static Vector<BlackBomb> bombList = new Vector<BlackBomb>();
     public static Vector<Player> playerList = new Vector<Player>();
-    private static Vector<Explosion> explosionList = new Vector<Explosion>();
+    public static Vector<Explosion> explosionList = new Vector<Explosion>();
 
     public static Vector<Entity> getEntities() {
         return entities;
@@ -58,7 +58,7 @@ public class Sandbox {
         if (e instanceof BlackBomb) {
             BlackBomb bomb = (BlackBomb) e;
 
-            if (bomb.getBelong().getLimit() < 5) {
+            if (bomb.getBelong().getLimit() < 8) {
 //                System.out.println(sandboxPlayer1.getLimit());
 
                 for (Entity entity : entities) {
