@@ -133,7 +133,6 @@ public class Player implements MovingEntity, KillableEntity {
 
             if (e != this && isColliding(e) && !e.isPlayerCollisionFriendly()) {
                 if (e instanceof Explosion) {
-                    System.out.println("*");
                     damage(100);
                 }
                 else
