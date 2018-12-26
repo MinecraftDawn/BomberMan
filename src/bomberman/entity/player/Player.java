@@ -40,7 +40,7 @@ public class Player implements MovingEntity, KillableEntity {
         } else if (playerNumber == 2) {
             init(576, 576);
         }
-        power = 5;
+        power = 1;
         health = 100;
         isAlive = true;
         bombLimit = 0;

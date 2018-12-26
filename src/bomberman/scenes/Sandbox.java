@@ -58,8 +58,7 @@ public class Sandbox {
         if (e instanceof BlackBomb) {
             BlackBomb bomb = (BlackBomb) e;
 
-            if (bomb.getBelong().getLimit() < 8) {
-//                System.out.println(sandboxPlayer1.getLimit());
+            if (bomb.getBelong().getLimit() < 5) {
 
                 for (Entity entity : entities) {
                     if (entity.getPositionX() == e.getPositionX() && entity.getPositionY() == e.getPositionY()) {
@@ -101,7 +100,7 @@ public class Sandbox {
             Iterator<BlackBomb> it = bombList.iterator();
             Vector<BlackBomb> explode = new Vector<BlackBomb>();
 
-            while(it.hasNext()) {
+            while (it.hasNext()) {
                 BlackBomb theBomb = it.next();
                 int bombx = theBomb.positionX;
                 int bomby = theBomb.positionY;
@@ -115,7 +114,7 @@ public class Sandbox {
             }
 
             it = explode.iterator();
-            while(it.hasNext()) {
+            while (it.hasNext()) {
                 BlackBomb theBomb = it.next();
                 addExplosion(theBomb);
             }
@@ -130,8 +129,7 @@ public class Sandbox {
 
                 addEntityToGame(xExplosion);
                 addEntityToGame(yExplosion);
-            }
-            else {
+            } else {
                 xExplosion = new Explosion(bomb, x, y);
                 explosionList.add(xExplosion);
                 addEntityToGame(xExplosion);
@@ -219,7 +217,7 @@ public class Sandbox {
         return sandboxPlayer2;
     }
 
-    public static Vector<Explosion> getExplosionList(){
+    public static Vector<Explosion> getExplosionList() {
         return explosionList;
     }
 }
