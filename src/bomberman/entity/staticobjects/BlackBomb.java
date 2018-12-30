@@ -16,6 +16,7 @@ import bomberman.entity.boundedbox.RectBoundedBox;
 import bomberman.scenes.Sandbox;
 
 import java.util.Date;
+import java.util.Iterator;
 
 /**
  * @author Ashish
@@ -81,12 +82,43 @@ public class BlackBomb implements StaticEntity {
         if (new Date().getTime() > bomberExistTime + startTime) {
             return STATE.DEAD;
         }
-        else if (new Date().getTime() > penetrateTime + startTime) {
-            canPenetrate = false;
-            return STATE.ACTIVE;
-        }
+//        else if (new Date().getTime() > penetrateTime + startTime) {
+//            canPenetrate = false;
+////            Iterator<Player> it = Sandbox.playerList.iterator();
+////            while (it.hasNext()) {
+////                Player p = it.next();
+////                if (positionX == p.positionX && positionY == p.positionY) {
+////                    canPenetrate = false;
+////                    break;
+////                }
+////                else canPenetrate = true;
+////            }
+//            return STATE.ACTIVE;
+//        }
         else {
             return STATE.ACTIVE;
+        }
+    }
+
+    public void determinePenetrate() {
+        Iterator<Player> it = Sandbox.playerList.iterator();
+        while (it.hasNext()) {
+            Player p = it.next();
+            int posX = p.getPositionX() + 16;
+            int posY = p.getPositionY() + 16;
+
+            posX = posX - posX % 32;
+            posY = posY - posY % 32;
+
+            if (positionX == posX && positionY == posY) {
+                System.out.println("X");
+                canPenetrate = true;
+                break;
+            }
+            else {
+                canPenetrate = false;
+                System.out.println("Z");
+            }
         }
     }
 

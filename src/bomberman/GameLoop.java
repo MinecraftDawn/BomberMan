@@ -59,15 +59,9 @@ public class GameLoop {
             if (entity instanceof BlackBomb) {
                 BlackBomb bomb = (BlackBomb) entity;
                 boolean alive = bomb.isAlive();
+                bomb.determinePenetrate();
 
-                if (bomb.isExploded()) {
-                    it.remove();
-                    if (bomb.getBelong() == Sandbox.getPlayer1()) {
-                        Sandbox.getPlayer1().limitDecrease();
-                    } else {
-                        Sandbox.getPlayer2().limitDecrease();
-                    }
-                } else if (!alive) {
+                if (!alive) {
                     // not removig directly from list to prevent ConcurrentModification
                     if (bomb.getBelong() == Sandbox.getPlayer1()) {
                         Sandbox.getPlayer1().limitDecrease();
@@ -76,7 +70,7 @@ public class GameLoop {
                     }
                     deadBomb.add(bomb);
                     it.remove();
-                    Sandbox.bombList.remove(0);
+//                    Sandbox.bombList.remove(0);
                 }
                 //如果實體是爆炸
             } else if (entity instanceof Explosion) {
