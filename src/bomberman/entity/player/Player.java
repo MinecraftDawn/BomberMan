@@ -86,6 +86,7 @@ public class Player implements MovingEntity, KillableEntity {
         if(health <= 0 ){
             health = 0;
             isAlive = false;
+            System.exit(0);
         }
     }
 
