@@ -22,6 +22,7 @@ public class Player implements MovingEntity, KillableEntity {
     private int playerNumber;
     RectBoundedBox playerBoundary;
     private int power;
+    private int speed;
 
     Sprite currentSprite;
     PlayerAnimations playerAnimations;
@@ -40,10 +41,11 @@ public class Player implements MovingEntity, KillableEntity {
         } else if (playerNumber == 2) {
             init(576, 576);
         }
-        power = 1;
+        power = 3;
         health = 100;
         isAlive = true;
         bombLimit = 0;
+        speed = 3;
     }
 
     public Player(int posX, int posY) {
@@ -95,6 +97,10 @@ public class Player implements MovingEntity, KillableEntity {
         return health;
     }
 
+    public int getSpeed() {
+        return speed;
+    }
+
     public boolean isAlive() {
         return isAlive;
     }
@@ -133,7 +139,6 @@ public class Player implements MovingEntity, KillableEntity {
 
             if (e != this && isColliding(e) && !e.isPlayerCollisionFriendly()) {
                 if (e instanceof Explosion) {
-                    System.out.println("*");
                     damage(100);
                 }
                 else

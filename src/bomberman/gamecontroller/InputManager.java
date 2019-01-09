@@ -30,28 +30,28 @@ public class InputManager {
 
         //System.err.println(""+keyboardInputs);
         if (keyboardInputs.contains(KeyCode.UP)) {
-            player1.move(5, Direction.UP);
+            player1.move(player1.getSpeed(), Direction.UP);
         }
         if (keyboardInputs.contains(KeyCode.DOWN)) {
-            player1.move(5, Direction.DOWN);
+            player1.move(player1.getSpeed(), Direction.DOWN);
         }
         if (keyboardInputs.contains(KeyCode.LEFT)) {
-            player1.move(5, Direction.LEFT);
+            player1.move(player1.getSpeed(), Direction.LEFT);
         }
         if (keyboardInputs.contains(KeyCode.RIGHT)) {
-            player1.move(5, Direction.RIGHT);
+            player1.move(player1.getSpeed(), Direction.RIGHT);
         }
         if (keyboardInputs.contains(KeyCode.W)) {
-            player2.move(5, Direction.UP);
+            player2.move(player2.getSpeed(), Direction.UP);
         }
         if (keyboardInputs.contains(KeyCode.S)) {
-            player2.move(5, Direction.DOWN);
+            player2.move(player2.getSpeed(), Direction.DOWN);
         }
         if (keyboardInputs.contains(KeyCode.A)) {
-            player2.move(5, Direction.LEFT);
+            player2.move(player2.getSpeed(), Direction.LEFT);
         }
         if (keyboardInputs.contains(KeyCode.D)) {
-            player2.move(5, Direction.RIGHT);
+            player2.move(player2.getSpeed(), Direction.RIGHT);
         }
         if (!keyboardInputs.contains(KeyCode.LEFT) &&
                 !keyboardInputs.contains(KeyCode.RIGHT) &&
@@ -82,7 +82,7 @@ public class InputManager {
             //爽Ra
             BlackBomb bomb = new BlackBomb(posX, posY, p);
             Sandbox.addEntityToGame(bomb);
-            Sandbox.bombList.add(bomb);
+//            Sandbox.bombList.add(bomb);
         }
     }
 }

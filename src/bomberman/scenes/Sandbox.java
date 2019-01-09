@@ -45,9 +45,9 @@ public class Sandbox {
     }
 
     private static Vector<Entity> entities = new Vector<Entity>();
-    public static Vector<BlackBomb> bombList = new Vector<BlackBomb>();
+//    public static Vector<BlackBomb> bombList = new Vector<BlackBomb>();
     public static Vector<Player> playerList = new Vector<Player>();
-    private static Vector<Explosion> explosionList = new Vector<Explosion>();
+    public static Vector<Explosion> explosionList = new Vector<Explosion>();
 
     public static Vector<Entity> getEntities() {
         return entities;
@@ -59,7 +59,6 @@ public class Sandbox {
             BlackBomb bomb = (BlackBomb) e;
 
             if (bomb.getBelong().getLimit() < 5) {
-//                System.out.println(sandboxPlayer1.getLimit());
 
                 for (Entity entity : entities) {
                     if (entity.getPositionX() == e.getPositionX() && entity.getPositionY() == e.getPositionY()) {
@@ -73,7 +72,7 @@ public class Sandbox {
                     sandboxPlayer2.limitIncrease();
                 }
 
-                bombList.add(bomb);
+//                bombList.add(bomb);
             } else {
                 return false;
             }
@@ -90,51 +89,94 @@ public class Sandbox {
     public static void addExplosion(BlackBomb bomb) {
         int x = bomb.getPositionX();
         int y = bomb.getPositionY();
-
+        boolean upwardHasWall = false;
+        boolean leftwardHasWall = false;
+        boolean rightwardHasWall = false;
+        boolean downwardHasWall = false;
         int power = bomb.getBelong().getPower();
 
-        for (int i = -power; i <= power; i++) {
-            Explosion xExplosion;
-            Explosion yExplosion;
-//            boolean isSetX = true;
-//            boolean isSetY = true;
-            Iterator<BlackBomb> it = bombList.iterator();
+        //由中間向四個方向出發
+        for (int i = 0; i <= power; i++) {
+            Explosion upExplosion;
+            Explosion downExplosion;
+            Explosion leftExplosion;
+            Explosion rightExplosion;
+            //因為同時要判斷wall以及bomb所以使用entities
+            Iterator<Entity> it = entities.iterator();
             Vector<BlackBomb> explode = new Vector<BlackBomb>();
 
-            while(it.hasNext()) {
-                BlackBomb theBomb = it.next();
-                int bombx = theBomb.positionX;
-                int bomby = theBomb.positionY;
+            while (it.hasNext()) {
+                Entity e = it.next();
 
-                if ((bombx == x + i * 32 && bomby == y) || (bombx == x && bomby == y + i * 32)) {
-                    //remove this bomb from the bombList but entityList
-                    it.remove();
-                    theBomb.setBombState(BlackBomb.STATE.DEAD);
-                    explode.add(theBomb);
+                if (e instanceof BlackBomb) {
+                    BlackBomb theBomb = (BlackBomb)e;
+                    int bombx = theBomb.positionX;
+                    int bomby = theBomb.positionY;
+
+                    //牆後的炸彈不應該被引爆
+                    if ((bombx == x + i * 32 && bomby == y && !rightwardHasWall) || (bombx == x && bomby == y + i * 32 && !upwardHasWall)
+                            || (bombx == x - i * 32 && bomby == y && !leftwardHasWall) || (bombx == x && bomby == y - i * 32 && !downwardHasWall)) {
+                        //記得減掉player的limit
+                        if (theBomb.getBelong() == getPlayer1()) {
+                            getPlayer1().limitDecrease();
+                        } else {
+                            getPlayer2().limitDecrease();
+                        }
+                        //這裡刪除的是entities裡的物件
+                        it.remove();
+                        theBomb.setBombState(BlackBomb.STATE.DEAD);
+                        explode.add(theBomb);
+                    }
+                }
+
+                if (e instanceof Wall) {
+                    Wall theWall = (Wall)e;
+                    int wallx = theWall.positionX;
+                    int wally = theWall.positionY;
+
+                    if (wallx == x + i * 32 && wally == y)
+                        rightwardHasWall = true;
+                    else if (wallx == x && wally == y + i * 32)
+                        upwardHasWall = true;
+                    else if (wallx == x - i * 32 && wally == y)
+                        leftwardHasWall = true;
+                    else if (wallx == x && wally == y - i * 32)
+                        downwardHasWall = true;
                 }
             }
 
-            it = explode.iterator();
-            while(it.hasNext()) {
-                BlackBomb theBomb = it.next();
+            Iterator<BlackBomb> bombIt = explode.iterator();
+            while (bombIt.hasNext()) {
+                BlackBomb theBomb = bombIt.next();
                 addExplosion(theBomb);
             }
 
             if (i != 0) {
+                if (!upwardHasWall) {
+                    upExplosion = new Explosion(bomb, x, y + i * 32);
+                    explosionList.add(upExplosion);
+                    addEntityToGame(upExplosion);
 
-                xExplosion = new Explosion(bomb, x + i * 32, y);
-                yExplosion = new Explosion(bomb, x, y + i * 32);
-
-                explosionList.add(xExplosion);
-                explosionList.add(yExplosion);
-
-                addEntityToGame(xExplosion);
-                addEntityToGame(yExplosion);
-            }
-            else {
-                xExplosion = new Explosion(bomb, x, y);
-                explosionList.add(xExplosion);
-                addEntityToGame(xExplosion);
+                }
+                if (!downwardHasWall) {
+                    downExplosion = new Explosion(bomb, x, y - i * 32);
+                    explosionList.add(downExplosion);
+                    addEntityToGame(downExplosion);
+                }
+                if (!leftwardHasWall) {
+                    leftExplosion = new Explosion(bomb, x - i * 32, y);
+                    explosionList.add(leftExplosion);
+                    addEntityToGame(leftExplosion);
+                }
+                if (!rightwardHasWall) {
+                    rightExplosion = new Explosion(bomb, x + i * 32, y);
+                    explosionList.add(rightExplosion);
+                    addEntityToGame(rightExplosion);
+                }
+            } else {
+                upExplosion = new Explosion(bomb, x, y);
+                explosionList.add(upExplosion);
+                addEntityToGame(upExplosion);
             }
         }
     }
@@ -207,8 +249,10 @@ public class Sandbox {
     public static void setPlayer(Player p1, Player p2) {
         sandboxPlayer1 = p1;
         addEntityToGame(p1);
+        playerList.add(p1);
         sandboxPlayer2 = p2;
         addEntityToGame(p2);
+        playerList.add(p2);
     }
 
     public static Player getPlayer1() {
@@ -219,7 +263,7 @@ public class Sandbox {
         return sandboxPlayer2;
     }
 
-    public static Vector<Explosion> getExplosionList(){
+    public static Vector<Explosion> getExplosionList() {
         return explosionList;
     }
 }
