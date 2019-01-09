@@ -111,13 +111,11 @@ public class BlackBomb implements StaticEntity {
             posY = posY - posY % 32;
 
             if (positionX == posX && positionY == posY) {
-                System.out.println("X");
                 canPenetrate = true;
                 break;
             }
             else {
                 canPenetrate = false;
-                System.out.println("Z");
             }
         }
     }
